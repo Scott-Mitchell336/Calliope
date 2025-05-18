@@ -1,0 +1,42 @@
+{
+  "name": "calliope",
+  "version": "1.0.0",
+  "description": "Review platform backend API",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --forceExit --runInBand",
+    "test:auth": "NODE_ENV=test jest tests/auth.test.js --forceExit --runInBand",
+    "test:items": "NODE_ENV=test jest tests/items.test.js --forceExit --runInBand",
+    "test:reviews": "NODE_ENV=test jest tests/reviews.test.js --forceExit --runInBand",
+    "test:comments": "NODE_ENV=test jest tests/comments.test.js --forceExit --runInBand",
+    "test:reset-db": "NODE_ENV=test node -e \"require('./tests/testSetup').resetTestDatabase().then(() => console.log('Test database reset complete!')).catch(err => { console.error(err); process.exit(1); })\"",
+    "test:clean": "npm run test:reset-db && npm test",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "seed": "node db/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scott-Mitchell336/Calliope.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Scott-Mitchell336/Calliope/issues"
+  },
+  "homepage": "https://github.com/Scott-Mitchell336/Calliope#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.1"
+  }
+}

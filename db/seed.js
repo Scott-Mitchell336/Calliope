@@ -1,3 +1,6 @@
+// This seed file was created with the help of Github CoPilot
+
+
 const { pool } = require('./connection');
 const bcrypt = require('bcrypt');
 const fs = require('fs');

@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db/connection');
 const { authenticateToken } = require('../middleware/auth');
 
-// GET /items - Get all items
+// GET /api/items - Get all items
 router.get('/', async (req, res) => {
   try {
     // Support search by name or category
@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /items/:itemId - Get a specific item
+// GET /api/items/:itemId - Get a specific item
 router.get('/:itemId', async (req, res) => {
   try {
     const { itemId } = req.params;
@@ -78,7 +78,7 @@ router.get('/:itemId', async (req, res) => {
   }
 });
 
-// GET /items/:itemId/reviews - Get all reviews for an item
+// GET /api/items/:itemId/reviews - Get all reviews for an item
 router.get('/:itemId/reviews', authenticateToken, async (req, res) => {
   try {
     const { itemId } = req.params;
@@ -110,7 +110,7 @@ router.get('/:itemId/reviews', authenticateToken, async (req, res) => {
   }
 });
 
-// GET /items/:itemId/reviews/:reviewId - Get a specific review for an item
+// GET /api/items/:itemId/reviews/:reviewId - Get a specific review for an item
 router.get('/:itemId/reviews/:reviewId', async (req, res) => {
   try {
     const { itemId, reviewId } = req.params;
@@ -150,7 +150,7 @@ router.get('/:itemId/reviews/:reviewId', async (req, res) => {
   }
 });
 
-// POST /items/:itemId/reviews - Create a review for an item
+// POST /api/items/:itemId/reviews - Create a review for an item
 router.post('/:itemId/reviews', authenticateToken, async (req, res) => {
   try {
     const { itemId } = req.params;
@@ -210,7 +210,7 @@ router.post('/:itemId/reviews', authenticateToken, async (req, res) => {
   }
 });
 
-// POST /items/:itemId/reviews/:reviewId/comments - Add a comment to a review
+// POST /api/items/:itemId/reviews/:reviewId/comments - Add a comment to a review
 router.post('/:itemId/reviews/:reviewId/comments', authenticateToken, async (req, res) => {
   try {
     const { itemId, reviewId } = req.params;

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../db/connection');
 const { authenticateToken } = require('../middleware/auth');
 
-// POST /auth/register - Register a new user
+// POST /api/auth/register - Register a new user
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -51,7 +51,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// POST /auth/login - Login a user
+// POST /api/auth/login - Login a user
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -102,7 +102,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// GET /auth/me - Get current user info
+// GET /api/auth/me - Get current user info
 router.get('/me', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;

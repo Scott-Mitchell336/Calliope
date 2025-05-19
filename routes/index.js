@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db/connection');
 const { authenticateToken, checkUserAuthorization } = require('../middleware/auth');
 
-// PUT /users/:userId/reviews/:reviewId - Edit a user's review
+// PUT /api/users/:userId/reviews/:reviewId - Edit a user's review
 router.put('/:userId/reviews/:reviewId', authenticateToken, checkUserAuthorization, async (req, res) => {
   try {
     const { userId, reviewId } = req.params;
@@ -40,7 +40,7 @@ router.put('/:userId/reviews/:reviewId', authenticateToken, checkUserAuthorizati
   }
 });
 
-// DELETE /users/:userId/reviews/:reviewId - Delete a user's review
+// DELETE /api/users/:userId/reviews/:reviewId - Delete a user's review
 router.delete('/:userId/reviews/:reviewId', authenticateToken, checkUserAuthorization, async (req, res) => {
   try {
     const { userId, reviewId } = req.params;
@@ -68,7 +68,7 @@ router.delete('/:userId/reviews/:reviewId', authenticateToken, checkUserAuthoriz
   }
 });
 
-// PUT /users/:userId/comments/:commentId - Edit a user's comment
+// PUT /api/users/:userId/comments/:commentId - Edit a user's comment
 router.put('/:userId/comments/:commentId', authenticateToken, checkUserAuthorization, async (req, res) => {
   try {
     const { userId, commentId } = req.params;
@@ -101,7 +101,7 @@ router.put('/:userId/comments/:commentId', authenticateToken, checkUserAuthoriza
   }
 });
 
-// DELETE /users/:userId/comments/:commentId - Delete a user's comment
+// DELETE /api/users/:userId/comments/:commentId - Delete a user's comment
 router.delete('/:userId/comments/:commentId', authenticateToken, checkUserAuthorization, async (req, res) => {
   try {
     const { userId, commentId } = req.params;

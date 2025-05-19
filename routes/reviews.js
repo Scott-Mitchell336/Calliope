@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../db/connection');
 const { authenticateToken } = require('../middleware/auth');
 
-// GET /reviews/me - Get all reviews by the authenticated user
+// GET /api/reviews/me - Get all reviews by the authenticated user
 router.get('/me', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;

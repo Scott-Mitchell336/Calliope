@@ -30,7 +30,7 @@ afterAll(async () => {
 describe('Auth Routes', () => {
   let authToken;
 
-  describe('POST /auth/register', () => {
+  describe('POST /api/auth/register', () => {
     it('should register a new user', async () => {
       const timestamp = Date.now();
       const newUser = {
@@ -40,7 +40,7 @@ describe('Auth Routes', () => {
       };
 
       const response = await request(app)
-        .post('/auth/register')
+        .post('/api/auth/register')
         .send(newUser);
 
       expect(response.status).toBe(201);
@@ -58,7 +58,7 @@ describe('Auth Routes', () => {
       };
 
       const response = await request(app)
-        .post('/auth/register')
+        .post('/api/auth/register')
         .send(existingUser);
 
       expect(response.status).toBe(400);
@@ -76,7 +76,7 @@ describe('Auth Routes', () => {
       };
 
       const response = await request(app)
-        .post('/auth/register')
+        .post('/api/auth/register')
         .send(existingEmail);
 
       expect(response.status).toBe(400);
@@ -90,7 +90,7 @@ describe('Auth Routes', () => {
       };
 
       const response = await request(app)
-        .post('/auth/register')
+        .post('/api/auth/register')
         .send(incompleteUser);
 
       expect(response.status).toBe(400);
@@ -98,7 +98,7 @@ describe('Auth Routes', () => {
     });
   });
 
-  describe('POST /auth/login', () => {
+  describe('POST /api/auth/login', () => {
     it('should login a user and return a token', async () => {
       const loginUser = {
         username: testUsers[0].username,
@@ -106,7 +106,7 @@ describe('Auth Routes', () => {
       };
 
       const response = await request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send(loginUser);
 
       expect(response.status).toBe(200);
@@ -125,7 +125,7 @@ describe('Auth Routes', () => {
       };
 
       const response = await request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send(invalidUser);
 
       expect(response.status).toBe(401);
@@ -139,7 +139,7 @@ describe('Auth Routes', () => {
       };
 
       const response = await request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send(invalidPassword);
 
       expect(response.status).toBe(401);
@@ -147,7 +147,7 @@ describe('Auth Routes', () => {
     });
   });
 
-  describe('GET /auth/me', () => {
+  describe('GET /api/auth/me', () => {
     it('should return the authenticated user', async () => {
       // First, register a new user
       const newUser = {
@@ -157,12 +157,12 @@ describe('Auth Routes', () => {
       };
       
       await request(app)
-        .post('/auth/register')
+        .post('/api/auth/register')
         .send(newUser);
       
       // Login to get a token
       const loginResponse = await request(app)
-        .post('/auth/login')
+        .post('/api/auth/login')
         .send({
           username: newUser.username,
           password: newUser.password
@@ -171,7 +171,7 @@ describe('Auth Routes', () => {
       const token = loginResponse.body.token;
 
       const response = await request(app)
-        .get('/auth/me')
+        .get('/api/auth/me')
         .set('Authorization', `Bearer ${token}`);
 
       expect(response.status).toBe(200);
@@ -182,7 +182,7 @@ describe('Auth Routes', () => {
 
     it('should return 401 if no token is provided', async () => {
       const response = await request(app)
-        .get('/auth/me');
+        .get('/api/auth/me');
 
       expect(response.status).toBe(401);
       expect(response.body).toHaveProperty('error');
@@ -190,7 +190,7 @@ describe('Auth Routes', () => {
 
     it('should return 403 if an invalid token is provided', async () => {
       const response = await request(app)
-        .get('/auth/me')
+        .get('/api/auth/me')
         .set('Authorization', 'Bearer invalidtoken');
 
       expect(response.status).toBe(403);
